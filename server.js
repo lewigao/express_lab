@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express(); // calling this sets up a server
 const PORT = 3030;
+const userRouter = require('./routes/users');
 
 app.set('view engine', 'ejs');
 
@@ -9,12 +10,6 @@ app.get("/", (req, res) =>{
     res.render("index", {user:"Lewi!"});
 });
 
-app.get("/users", (req, res) => {
-    res.send("User List");
-});
-
-app.get("/users/new", (req, res) => {
-    res.send("New User Form");
-});
+app.use('/users', userRouter);
 
 app.listen(PORT);
