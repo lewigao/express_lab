@@ -2,16 +2,32 @@ const express = require('express');
 const router = express.Router()
 
 router.get("/", (req, res) => {
-    res.send("User List");
+    res.render('users/list', {users: users})
 });
 
 router.get("/new", (req, res) => {
     res.send("New User Form");
 });
 
-// router.get('/:id', (req, res)=> {
-//     res.send(`Getting User data: ${req.params.id}`)
+// router.post('/new', (req, res)=> {
+//     res.render('users/new', {firstName: "Please enter name"});
 // });
+
+router.post("/", (req, res) => {
+    const name = req.body.firstName;
+    const isValid = firstName != "";
+
+    if (isValid) {
+        console.log(`Adding user ${name}`);
+        users.push({ name: firstName });
+        console.log("New set of users: " + `${users}`)
+        res.send("User Created!");
+    }
+    else {
+        console.log("Error adding user!");
+        res.render("users/new", { firstName: firstName });
+    }
+});
 
 router.route("/:id").get((req, res) => {
     res.send(`Getting User data: ${req.params.id}`);
@@ -21,7 +37,7 @@ router.route("/:id").get((req, res) => {
     res.send(`Updating user with ID: ${req.params.id}`);
 });
 
-const users = [{name:"Lewi"}, {name: "George"}]
+const users = [{ name: "Lewi" }, { name: "George" }]
 router.param('id', (req, res, next, id) => {
     console.log(`Accessing user #${id}`);
     next();
