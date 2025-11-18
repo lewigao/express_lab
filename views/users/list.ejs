@@ -8,11 +8,11 @@
 <body>
     <h1>Current Users</h1>
     <!-- switches to JS "mode" -->
-    <% users.forEach(user=>( %>
+    <% users.forEach(user=>{ %>
     <!-- switches to HTML "mode" -->
     <div class="user">
         <h3> <%= user.name %></h3>
     </div>
-    <% )) %>
+    <% }); %>
 </body>
 </html>

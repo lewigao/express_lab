@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router()
 
 router.get("/", (req, res) => {
-    res.render('users/list', {users: users})
+    res.render('users/list', { users: users })
 });
 
 router.get("/new", (req, res) => {
@@ -14,14 +14,14 @@ router.get("/new", (req, res) => {
 // });
 
 router.post("/", (req, res) => {
-    const name = req.body.firstName;
+    res.send("User Created!");
+    const firstName = req.body.firstName;
     const isValid = firstName != "";
 
     if (isValid) {
-        console.log(`Adding user ${name}`);
+        console.log(`Adding user ${firstName}`);
         users.push({ name: firstName });
         console.log("New set of users: " + `${users}`)
-        res.send("User Created!");
     }
     else {
         console.log("Error adding user!");

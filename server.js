@@ -9,7 +9,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({extended:true}));
 //app.use(logger);
 
-app.get("/", logger, (req, res) =>{
+app.get("/", (req, res) =>{
     console.log('BALLS');
     res.render("index", {user:"Lewi!"});
 });
@@ -18,6 +18,9 @@ app.use("/users", userRouter);
 app.use("/posts", postRouter);
 
 app.listen(PORT);
+app.get('/new', (req, res) => {
+    res.render('users/new', {firstName: "Please enter a username"});
+});
 
 function logger(req, res, next){
     console.log(`Page Accessed: ${req.originalUrl}`);
